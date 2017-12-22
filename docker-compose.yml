@@ -4,8 +4,8 @@ services:
     catalogue:
         build:
             context: .
-            dockerfile: ./docker/catalogue/Dockerfile
-        image: weaveworksdemos/catalogue-dev
+            dockerfile: ./Dockerfile
+        image: cloudpossedemo/catalogue
         hostname: catalogue
         restart: always
         cap_drop:
@@ -18,9 +18,7 @@ services:
         ports:
             - "8080:80"
     catalogue-db:
-        build:
-            context: ./docker/catalogue-db/
-        image: weaveworksdemos/catalogue-dev-db
+        image: cloudpossedemo/catalogue-db
         hostname: catalogue-db
         restart: always
         environment:
