@@ -3,13 +3,14 @@ version: '1.0'
 
 steps:
   build-image:
+    title: Build image
     type: build
     description: Build catalogue
     image-name: cloudpossedemo/catalogue
     dockerfile: Dockerfile
 
   semver:
-    title: Export semversion
+    title: Export semantic version
     image: cloudposse/build-harness:feature-helm-chart-ops
     working_directory: ${{build-image}}
     commands:
@@ -32,6 +33,7 @@ steps:
       - GIT_BRANCH=${{CF_BRANCH}}
 
   push-image-commit:
+    title: Push image with commit based semver tags
     type: push
     candidate: ${{build-image}}
     tags:
@@ -39,6 +41,7 @@ steps:
       - "${{SEMVERSION_COMMIT}}"
 
   push-image-branch:
+    title: Push image with branch based semver tags
     type: push
     candidate: ${{build-image}}
     tags:
@@ -51,6 +54,7 @@ steps:
           executeForBranch: "'${{SEMVERSION_BRANCH}}' != ''"
 
   push-image-tag:
+    title: Push image with tag based semver tags
     type: push
     candidate: ${{build-image}}
     tag: "${{SEMVERSION_TAG}}"
@@ -60,6 +64,7 @@ steps:
           executeForTag: "'${{SEMVERSION_TAG}}' != ''"
 
   push-image-latest:
+    title: Push image with latest tag
     type: push
     candidate: ${{build-image}}
     tag: latest
@@ -67,3 +72,16 @@ steps:
       condition:
         all:
           executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
+
+  deploy-helm:
+    title: Deploy helm chart
+    image: codefresh/plugin-helm:2.7.2
+    environment:
+      - CHART_NAME=catalogue
+      - RELEASE_NAME=catalogue-${{SEMVERSION_BRANCH}}
+      - KUBE_CONTEXT=cluster-4
+      - NAMESPACE=test
+      - CHART_VERSION=${{SEMVERSION_BRANCH}}
+      - CHART_REPO_URL=${{REPO_ENDPOINT}}
+      - WAIT=false
+      - TIMEOUT=1200
