@@ -3,6 +3,6 @@ dependencies:
   version: 0.0.1
   repository: https://kubernetes-charts-incubator.storage.googleapis.com/
 - name: catalogue-db
-  version: 0.3.0-master
+  version: 0.0.3-master
   condition: db.enabled, global.db.enabled
   repository: "@cloudpossedemo"
