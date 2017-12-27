@@ -7,17 +7,54 @@ steps:
     description: Build catalogue
     image-name: cloudpossedemo/catalogue
     dockerfile: Dockerfile
-    tag: ${{CF_BRANCH}}
 
-  push-image-branch:
-    type: push
-    candidate: ${{build-image}}
-    tag: ${{CF_BRANCH}}
+  semver:
+    title: Export semversion
+    image: cloudposse/build-harness:feature-helm-chart-ops
+    working_directory: ${{build-image}}
+    commands:
+      - make git:show
+      - make semver:show
+      - make semver:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+    environment:
+      - GIT_BRANCH=${{CF_BRANCH}}
+
+  build-chart:
+    title: Build Charts
+    image: cloudposse/build-harness:feature-helm-chart-ops
+    working_directory: ${{build-image}}
+    commands:
+      - make helm:repo:add-remote
+      - make helm:chart:build-all
+      - make helm:chart:publish
 
   push-image-commit:
     type: push
     candidate: ${{build-image}}
-    tag: ${{CF_REVISION}}
+    tags:
+      - "${{SEMVERSION_COMMIT_SHORT}}"
+      - "${{SEMVERSION_COMMIT}}"
+
+  push-image-branch:
+    type: push
+    candidate: ${{build-image}}
+    tags:
+      - "${{SEMVERSION_BRANCH}}"
+      - "${{SEMVERSION_BRANCH_COMMIT_SHORT}}"
+      - "${{SEMVERSION_BRANCH_COMMIT}}"
+    when:
+      condition:
+        all:
+          executeForBranch: "'${{SEMVERSION_BRANCH}}' != ''"
+
+  push-image-tag:
+    type: push
+    candidate: ${{build-image}}
+    tag: "${{SEMVERSION_TAG}}"
+    when:
+      condition:
+        all:
+          executeForTag: "'${{SEMVERSION_TAG}}' != ''"
 
   push-image-latest:
     type: push

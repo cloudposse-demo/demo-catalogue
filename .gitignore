@@ -3,3 +3,5 @@ __pycache__/
 vendor/**
 !vendor/manifest
 coverage.out
+.build-harness
+packages
