@@ -5,4 +5,4 @@ dependencies:
 - name: cloudpossedemo/catalogue-db
   version: 0.3.0-master
   condition: db.enabled, global.db.enabled
-  repository: "@cloupossedemo"
+  repository: "@cloudpossedemo"
