@@ -16,7 +16,6 @@ steps:
       - make git:show
       - make semver:show
       - make semver:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
-      - make git:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
     environment:
       - GIT_BRANCH=${{CF_BRANCH}}
 
@@ -29,6 +28,8 @@ steps:
       - make helm:repo:add-remote
       - make helm:chart:build-all
       - make helm:chart:publish
+    environment:
+      - GIT_BRANCH=${{CF_BRANCH}}
 
   push-image-commit:
     type: push
