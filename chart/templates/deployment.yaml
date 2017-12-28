@@ -33,8 +33,6 @@ spec:
           - {{ .Values.config.images | quote }}
           - "--DSN"
           - {{ .Values.config.dataSource | quote }}
-          - "--zip"
-          - {{ .Values.config.zip | quote }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
