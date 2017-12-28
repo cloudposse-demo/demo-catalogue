@@ -26,11 +26,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        imagePullSecrets:
-{{ toYaml .Values.image.pullSecrets | indent 10 }}
         args:
           - "--port"
-          - {{ .Values.service.internalPort }}
+          - {{ .Values.service.internalPort | quote }}
           - "--images"
           - {{ .Values.config.images | quote }}
           - "--DSN"
