@@ -81,7 +81,7 @@ steps:
 
   deploy-helm:
     title: Deploy helm chart
-    image: codefresh/plugin-helm:2.7.2
+    image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
     commands:
       - helm repo add source ${{REPO_ENDPOINT}}
       - helm update
