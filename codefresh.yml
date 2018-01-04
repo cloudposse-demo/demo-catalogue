@@ -7,6 +7,7 @@ steps:
     image: alpine
     commands:
       - cf_export BUILD_HARNESS_VERSION=feature-helm-chart-ops
+      - cf_export GIT_BRANCH=${{CF_BRANCH}}
 
   build-image:
     title: Build image
@@ -23,8 +24,6 @@ steps:
       - make git:show
       - make semver:show
       - make semver:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
-    environment:
-      - GIT_BRANCH=${{CF_BRANCH}}
 
   build-chart:
     title: Build Charts
@@ -33,10 +32,9 @@ steps:
     commands:
       - REPO_NAME=cloudpossedemo REPO_ENDPOINT=${{REPO_ENDPOINT}} make helm:repo:add
       - make helm:repo:add-remote
+      - make helm:chart:clean
       - make helm:chart:build-all
       - make helm:chart:publish
-    environment:
-      - GIT_BRANCH=${{CF_BRANCH}}
 
   push-image-commit:
     title: Push image with commit based semver tags
