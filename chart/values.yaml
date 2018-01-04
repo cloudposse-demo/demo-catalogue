@@ -9,7 +9,7 @@ image:
   pullSecrets:
 config:
   images: "./images/"
-  dataSource: "catalogue_user:default_password@tcp(catalogue-db:3306)/socksdb"
+  dataSource: ""
   zip:
 deployment:
   ## Deployment annotations
