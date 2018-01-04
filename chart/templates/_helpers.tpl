@@ -5,6 +5,6 @@ Catalogue hostname
 {{- if .Values.config.dataSource -}}
 {{- .Values.config.dataSource | quote -}}
 {{- else -}}
-{{ .Values.catalogue-db.mysql.mysqlUser }}:$MYSQL_PASSWORD@tcp({{ template "catalogue-db.fullname" . }}:{{ template "catalogue-db.port" . }})/{{ .Values.catalogue-db.mysql.mysqlDatabase }}
+{{ .Values.catalogue_db.mysql.mysqlUser }}:$MYSQL_PASSWORD@tcp({{ template "catalogue_db.fullname" . }}:{{ template "catalogue_db.port" . }})/{{ .Values.catalogue_db.mysql.mysqlDatabase }}
 {{- end -}}
 {{- end -}}
