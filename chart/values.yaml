@@ -10,7 +10,7 @@ image:
   pullSecrets:
 config:
   images: "./images/"
-  dataSource: 
+  dataSource:
   zip:
 deployment:
   ## Deployment annotations

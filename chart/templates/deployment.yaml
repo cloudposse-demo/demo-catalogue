@@ -35,6 +35,7 @@ spec:
               key: mysql-password
 {{- end }}
         args:
+          - "/app/main"
           - "--port"
           - {{ .Values.service.internalPort | quote }}
           - "--images"
