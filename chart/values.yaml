@@ -1,15 +1,16 @@
-db:
+mysql:
   enabled: true
+  image: cloudpossedemo/catalogue-db
 
 replicaCount: 1
 image:
   repository: cloudpossedemo/catalogue
-  tag: {{ (datasource "semver").version }}
+  tag: '{{ (datasource "semver").version }}'
   pullPolicy: Always
   pullSecrets:
 config:
   images: "./images/"
-  dataSource: ""
+  dataSource: 
   zip:
 deployment:
   ## Deployment annotations

@@ -4,5 +4,8 @@ dependencies:
   repository: https://kubernetes-charts-incubator.storage.googleapis.com/
 - name: catalogue_db
   version: 0.0.3-master
-  condition: db.enabled, global.db.enabled
+  condition: mysql.enabled, global.mysql.enabled
   repository: "@cloudpossedemo"
+  import-values:
+  - child: mysql
+    parent: mysql

@@ -26,13 +26,21 @@ spec:
       - name: {{ .Chart.Name }}
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if not .Values.config.dataSource }}
+        env:
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ template "catalogue_db.secrets.name" . }}"
+              key: mysql-password
+{{- end }}
         args:
           - "--port"
           - {{ .Values.service.internalPort | quote }}
           - "--images"
           - {{ .Values.config.images | quote }}
           - "--DSN"
-          - {{ template "catalogue.datasource" . }}
+          - "{{ template "catalogue.datasource" . }}"
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
