@@ -41,7 +41,7 @@ spec:
           - "--images"
           - {{ .Values.config.images | quote }}
           - "--DSN"
-          - "{{ template "catalogue.datasource" . }}"
+          - {{ template "catalogue.datasource" . }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         livenessProbe:
