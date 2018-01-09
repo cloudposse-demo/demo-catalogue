@@ -23,7 +23,7 @@ deployment:
   #     iam.amazonaws.com/role: role-arn
 service:
   type: ClusterIP
-  externalPort: 8001
+  externalPort: 80
   internalPort: 8001
   # annotations:
   #   foo.io/bar: "true"
