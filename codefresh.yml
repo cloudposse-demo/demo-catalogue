@@ -85,7 +85,7 @@ steps:
     image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
     environment:
       - CHART_NAME=catalogue
-      - RELEASE_NAME=catalogue-${{CF_BRANCH_TAG_NORMALIZED}}
+      - RELEASE_NAME=catalogue-${{FEATURE}}
       - KUBE_CONTEXT=cluster-4
       - NAMESPACE=${{NAMESPACE}}
       - CHART_VERSION=${{SEMVERSION_BRANCH}}
