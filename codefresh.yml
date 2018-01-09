@@ -8,6 +8,7 @@ steps:
     commands:
       - cf_export BUILD_HARNESS_VERSION=feature-helm-chart-ops
       - cf_export GIT_BRANCH=${{CF_BRANCH}}
+      - cf_export BASE_HOST=cloudposse.org
 
   build-image:
     title: Build image
@@ -24,6 +25,8 @@ steps:
       - make git:show
       - make semver:show
       - make semver:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+      - make stages:export
+      - make stages:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
   build-chart:
     title: Build Charts
@@ -84,7 +87,7 @@ steps:
       - CHART_NAME=catalogue
       - RELEASE_NAME=catalogue-${{CF_BRANCH_TAG_NORMALIZED}}
       - KUBE_CONTEXT=cluster-4
-      - NAMESPACE=test
+      - NAMESPACE=${{NAMESPACE}}
       - CHART_VERSION=${{SEMVERSION_BRANCH}}
       - CHART_REPO_URL=${{REPO_ENDPOINT}}
       - WAIT=false
