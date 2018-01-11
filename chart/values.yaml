@@ -9,7 +9,7 @@ image:
   pullPolicy: Always
   pullSecrets:
 config:
-  images: "./images/"
+  images: "/images"
   dataSource:
   zip:
 deployment:
