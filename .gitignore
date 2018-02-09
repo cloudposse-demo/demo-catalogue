@@ -5,3 +5,5 @@ vendor/**
 coverage.out
 .build-harness
 packages
+.idea
+demo-catalogue.iml
