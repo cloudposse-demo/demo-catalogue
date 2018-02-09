@@ -119,7 +119,7 @@ steps:
       - custom_fullnameOverride=catalogue
 
   set-env-update-status-to-success:
-    title: Update "staging-environment" status to "success"
+    title: Update "Staging Environment" status to "success"
     image: cloudposse/github-status-updater
     environment:
       - GITHUB_ACTION=update_state
@@ -131,3 +131,4 @@ steps:
       - GITHUB_STATE=success
       - GITHUB_DESCRIPTION=Deployed to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
+
