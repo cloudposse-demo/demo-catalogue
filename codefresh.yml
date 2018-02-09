@@ -121,7 +121,6 @@ steps:
       - WAIT=false
       - TIMEOUT=1200
       - custom_fullnameOverride=catalogue
-      - DEBUG_CHART=true
 
   set-deployment-status-to-success:
     title: Set "Staging Environment" deployment status to "success"
