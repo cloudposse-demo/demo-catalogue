@@ -10,7 +10,7 @@ steps:
       - cf_export GIT_BRANCH=${{CF_BRANCH}}
 
   update-branch-protection:
-    title: Add "staging-environment" status check to the branch
+    title: Add "Staging Environment" status check to the branch
     image: cloudposse/github-status-updater
     environment:
       - GITHUB_ACTION=update_branch_protection
@@ -18,10 +18,10 @@ steps:
       - GITHUB_OWNER=${{CF_REPO_OWNER}}
       - GITHUB_REPO=${{CF_REPO_NAME}}
       - GITHUB_REF=${{CF_BRANCH}}
-      - GITHUB_CONTEXT=staging-environment
+      - GITHUB_CONTEXT=Staging Environment
 
   set-env-update-status-to-pending:
-    title: Update "staging-environment" status to "pending"
+    title: Update "Staging Environment" status to "pending"
     image: cloudposse/github-status-updater
     environment:
       - GITHUB_ACTION=update_state
@@ -29,9 +29,9 @@ steps:
       - GITHUB_OWNER=${{CF_REPO_OWNER}}
       - GITHUB_REPO=${{CF_REPO_NAME}}
       - GITHUB_REF=${{CF_REVISION}}
-      - GITHUB_CONTEXT=staging-environment
+      - GITHUB_CONTEXT=Staging Environment
       - GITHUB_STATE=pending
-      - GITHUB_DESCRIPTION=Updating Environment...
+      - GITHUB_DESCRIPTION=Deploying changes to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
 
   build-image:
@@ -127,7 +127,7 @@ steps:
       - GITHUB_OWNER=${{CF_REPO_OWNER}}
       - GITHUB_REPO=${{CF_REPO_NAME}}
       - GITHUB_REF=${{CF_REVISION}}
-      - GITHUB_CONTEXT=staging-environment
+      - GITHUB_CONTEXT=Staging Environment
       - GITHUB_STATE=success
-      - GITHUB_DESCRIPTION=Environment updated
+      - GITHUB_DESCRIPTION=Deployed to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
