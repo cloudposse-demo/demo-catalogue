@@ -135,4 +135,3 @@ steps:
       - GITHUB_STATE=success
       - GITHUB_DESCRIPTION=Deployed to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
-
