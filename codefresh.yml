@@ -31,7 +31,7 @@ steps:
       - GITHUB_REF=${{CF_REVISION}}
       - GITHUB_CONTEXT=staging-environment
       - GITHUB_STATE=pending
-      - GITHUB_DESCRIPTION="Updating Environment..."
+      - GITHUB_DESCRIPTION=Updating Environment...
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
 
   build-image:
@@ -129,5 +129,5 @@ steps:
       - GITHUB_REF=${{CF_REVISION}}
       - GITHUB_CONTEXT=staging-environment
       - GITHUB_STATE=success
-      - GITHUB_DESCRIPTION="Environment Updated"
+      - GITHUB_DESCRIPTION=Environment updated
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
