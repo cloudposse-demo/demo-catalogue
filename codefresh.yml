@@ -9,31 +9,6 @@ steps:
       - cf_export BUILD_HARNESS_VERSION=feature-helm-chart-ops
       - cf_export GIT_BRANCH=${{CF_BRANCH}}
 
-  update-branch-protection:
-    title: Add "Staging Environment" status check to the branch
-    image: cloudposse/github-status-updater
-    environment:
-      - GITHUB_ACTION=update_branch_protection
-      - GITHUB_TOKEN=${{GITHUB_TOKEN}}
-      - GITHUB_OWNER=${{CF_REPO_OWNER}}
-      - GITHUB_REPO=${{CF_REPO_NAME}}
-      - GITHUB_REF=${{CF_BRANCH}}
-      - GITHUB_CONTEXT=Staging Environment
-
-  set-env-update-status-to-pending:
-    title: Update "Staging Environment" status to "pending"
-    image: cloudposse/github-status-updater
-    environment:
-      - GITHUB_ACTION=update_state
-      - GITHUB_TOKEN=${{GITHUB_TOKEN}}
-      - GITHUB_OWNER=${{CF_REPO_OWNER}}
-      - GITHUB_REPO=${{CF_REPO_NAME}}
-      - GITHUB_REF=${{CF_REVISION}}
-      - GITHUB_CONTEXT=Staging Environment
-      - GITHUB_STATE=pending
-      - GITHUB_DESCRIPTION=Deploying changes to ${{FEATURE}} namespace
-      - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
-
   build-image:
     title: Build image
     type: build
@@ -103,6 +78,31 @@ steps:
       condition:
         all:
           executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
+
+  update-branch-protection:
+    title: Add "Staging Environment" status check to the branch
+    image: cloudposse/github-status-updater
+    environment:
+      - GITHUB_ACTION=update_branch_protection
+      - GITHUB_TOKEN=${{GITHUB_TOKEN}}
+      - GITHUB_OWNER=${{CF_REPO_OWNER}}
+      - GITHUB_REPO=${{CF_REPO_NAME}}
+      - GITHUB_REF=${{CF_BRANCH}}
+      - GITHUB_CONTEXT=Staging Environment
+
+  set-env-update-status-to-pending:
+    title: Update "Staging Environment" status to "pending"
+    image: cloudposse/github-status-updater
+    environment:
+      - GITHUB_ACTION=update_state
+      - GITHUB_TOKEN=${{GITHUB_TOKEN}}
+      - GITHUB_OWNER=${{CF_REPO_OWNER}}
+      - GITHUB_REPO=${{CF_REPO_NAME}}
+      - GITHUB_REF=${{CF_REVISION}}
+      - GITHUB_CONTEXT=Staging Environment
+      - GITHUB_STATE=pending
+      - GITHUB_DESCRIPTION=Deploying changes to ${{FEATURE}} namespace
+      - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
 
   deploy-helm:
     title: Deploy helm chart
