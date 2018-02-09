@@ -89,6 +89,10 @@ steps:
       - GITHUB_REPO=${{CF_REPO_NAME}}
       - GITHUB_REF=${{CF_BRANCH}}
       - GITHUB_CONTEXT=Staging Environment
+    when:
+      condition:
+        all:
+          executeForBranch: "'${{SEMVERSION_BRANCH}}' != ''"
 
   set_deployment_status_to_pending:
     title: Set "Staging Environment" deployment status to "pending"
