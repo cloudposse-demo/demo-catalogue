@@ -89,9 +89,13 @@ steps:
       - GITHUB_REPO=${{CF_REPO_NAME}}
       - GITHUB_REF=${{CF_BRANCH}}
       - GITHUB_CONTEXT=Staging Environment
+    when:
+      condition:
+        all:
+          executeForBranch: "'${{SEMVERSION_BRANCH}}' != ''"
 
-  set-env-update-status-to-pending:
-    title: Update "Staging Environment" status to "pending"
+  set-deployment-status-to-pending:
+    title: Set "Staging Environment" deployment status to "pending"
     image: cloudposse/github-status-updater
     environment:
       - GITHUB_ACTION=update_state
@@ -118,8 +122,8 @@ steps:
       - TIMEOUT=1200
       - custom_fullnameOverride=catalogue
 
-  set-env-update-status-to-success:
-    title: Update "Staging Environment" status to "success"
+  set-deployment-status-to-success:
+    title: Set "Staging Environment" deployment status to "success"
     image: cloudposse/github-status-updater
     environment:
       - GITHUB_ACTION=update_state
@@ -131,4 +135,3 @@ steps:
       - GITHUB_STATE=success
       - GITHUB_DESCRIPTION=Deployed to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
-
