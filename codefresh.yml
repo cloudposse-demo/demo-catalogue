@@ -19,7 +19,7 @@ steps:
   semver:
     title: Export semantic version
     image: cloudposse/build-harness:${{BUILD_HARNESS_VERSION}}
-    working_directory: ${{build-image}}
+    working_directory: ${{build_image}}
     commands:
       - make git:show
       - make semver:show
@@ -30,7 +30,7 @@ steps:
   build_chart:
     title: Build Charts
     image: cloudposse/build-harness:${{BUILD_HARNESS_VERSION}}
-    working_directory: ${{build-image}}
+    working_directory: ${{build_image}}
     commands:
       - REPO_NAME=cloudpossedemo REPO_ENDPOINT=${{REPO_ENDPOINT}} make helm:repo:add
       - make helm:repo:add-remote
@@ -41,7 +41,7 @@ steps:
   push_image_commit:
     title: Push image with commit based semver tags
     type: push
-    candidate: ${{build-image}}
+    candidate: ${{build_image}}
     tags:
       - "${{SEMVERSION_COMMIT_SHORT}}"
       - "${{SEMVERSION_COMMIT}}"
@@ -49,7 +49,7 @@ steps:
   push_image_branch:
     title: Push image with branch based semver tags
     type: push
-    candidate: ${{build-image}}
+    candidate: ${{build_image}}
     tags:
       - "${{SEMVERSION_BRANCH}}"
       - "${{SEMVERSION_BRANCH_COMMIT_SHORT}}"
@@ -62,7 +62,7 @@ steps:
   push_image_tag:
     title: Push image with tag based semver tags
     type: push
-    candidate: ${{build-image}}
+    candidate: ${{build_image}}
     tag: "${{SEMVERSION_TAG}}"
     when:
       condition:
@@ -72,7 +72,7 @@ steps:
   push_image_latest:
     title: Push image with latest tag
     type: push
-    candidate: ${{build-image}}
+    candidate: ${{build_image}}
     tag: latest
     when:
       condition:
