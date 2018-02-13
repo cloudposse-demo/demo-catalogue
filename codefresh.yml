@@ -146,13 +146,13 @@ steps:
       - "SLACK_ICON_EMOJI=:rocket:"
       - SLACK_FALLBACK=Deployed to Staging environment
       - SLACK_COLOR=good
-      - SLACK_PRETEXT=[${{CF_COMMIT_MESSAGE}}](${{CF_COMMIT_URL}})
+      - SLACK_PRETEXT=${{CF_COMMIT_MESSAGE}}
       - SLACK_AUTHOR_NAME=Auto Deploy Robot
       - SLACK_AUTHOR_LINK=https://cloudposse.com/
       - SLACK_AUTHOR_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
       - SLACK_TITLE=Environment Updated
       - SLACK_TITLE_LINK=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
-      - SLACK_TEXT=The latest changes by [${{CF_COMMIT_AUTHOR}}](https://github.com/${{CF_COMMIT_AUTHOR}}) have been deployed to [${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}](http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}]
+      - SLACK_TEXT=The latest changes by @${{CF_COMMIT_AUTHOR}} have been deployed to http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
       - SLACK_THUMB_URL=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/SquareLogo2.png
       - SLACK_FOOTER=Helm Deployment
       - SLACK_FOOTER_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/kubernetes.png
