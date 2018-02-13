@@ -142,7 +142,7 @@ steps:
     environment:
       - SLACK_WEBHOOK_URL=${{SLACK_WEBHOOK_URL}}
       - SLACK_USER_NAME=CodeFresh
-      - SLACK_ICON_EMOJI=\:white_check_mark\:
+      - "SLACK_ICON_EMOJI=:white_check_mark:"
       - SLACK_FALLBACK=Deployed to Staging environment
       - SLACK_COLOR=good
       - SLACK_PRETEXT=${{CF_COMMIT_MESSAGE}}
