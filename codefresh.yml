@@ -106,7 +106,7 @@ steps:
       - GITHUB_CONTEXT=Staging Environment
       - GITHUB_STATE=pending
       - GITHUB_DESCRIPTION=Deploying changes to ${{FEATURE}} namespace
-      - GITHUB_TARGET_URL=${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
+      - GITHUB_TARGET_URL=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
 
   deploy-helm:
     title: Deploy helm chart
@@ -134,7 +134,7 @@ steps:
       - GITHUB_CONTEXT=Staging Environment
       - GITHUB_STATE=success
       - GITHUB_DESCRIPTION=Deployed to ${{FEATURE}} namespace
-      - GITHUB_TARGET_URL=${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
+      - GITHUB_TARGET_URL=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
 
   send-slack-notification:
     title: Send notification to Slack channel
@@ -150,7 +150,7 @@ steps:
       - SLACK_AUTHOR_LINK=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
       - SLACK_AUTHOR_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
       - SLACK_TITLE=Environment Updated
-      - SLACK_TITLE_LINK=${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
+      - SLACK_TITLE_LINK=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
       - SLACK_TEXT=The latest changes have been deployed
       - SLACK_THUMB_URL=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/SquareLogo2.png
       - SLACK_FOOTER=Helm Deployment
