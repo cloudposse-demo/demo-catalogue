@@ -148,7 +148,7 @@ steps:
       - SLACK_COLOR=good
       - SLACK_PRETEXT=${{CF_COMMIT_MESSAGE}}
       - SLACK_AUTHOR_NAME=Auto Deploy Robot
-      - SLACK_AUTHOR_LINK=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
+      - SLACK_AUTHOR_LINK=https://cloudposse.com/
       - SLACK_AUTHOR_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
       - SLACK_TITLE=Environment Updated
       - SLACK_TITLE_LINK=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
