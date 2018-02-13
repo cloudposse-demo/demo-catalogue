@@ -135,3 +135,29 @@ steps:
       - GITHUB_STATE=success
       - GITHUB_DESCRIPTION=Deployed to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://master.demo.cloudposse.org
+
+  send-slack-notification:
+    title: Send notification to Slack channel
+    image: cloudposse/slack-notifier
+    environment:
+      - SLACK_WEBHOOK_URL=${{SLACK_WEBHOOK_URL}}
+      - SLACK_USER_NAME=CodeFresh
+      - SLACK_ICON_EMOJI=":white_check_mark:"
+      - SLACK_FALLBACK=Deployed to Staging environment
+      - SLACK_COLOR=good
+      - SLACK_PRETEXT=${{CF_COMMIT_MESSAGE}}
+      - SLACK_AUTHOR_NAME=Auto Deploy Robot
+      - SLACK_AUTHOR_LINK=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
+      - SLACK_AUTHOR_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
+      - SLACK_TITLE=Environment Updated
+      - SLACK_TITLE_LINK=http://master.demo.cloudposse.org
+      - SLACK_TEXT=The latest changes have been deployed
+      - SLACK_THUMB_URL=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/SquareLogo2.png
+      - SLACK_FOOTER=Helm Deployment
+      - SLACK_FOOTER_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/kubernetes.png
+      - SLACK_FIELD1_TITLE=Environment
+      - SLACK_FIELD1_VALUE=Staging
+      - SLACK_FIELD1_SHORT=true
+      - SLACK_FIELD2_TITLE=Namespace
+      - SLACK_FIELD2_VALUE=${{FEATURE}}
+      - SLACK_FIELD2_SHORT=true
