@@ -152,7 +152,7 @@ steps:
       - SLACK_AUTHOR_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/small-cute-robot-square.png
       - SLACK_TITLE=Environment Updated
       - SLACK_TITLE_LINK=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
-      - SLACK_TEXT=The latest changes by @${{CF_COMMIT_AUTHOR}} have been deployed to http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
+      - SLACK_TEXT=The latest changes have been deployed to http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
       - SLACK_THUMB_URL=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/SquareLogo2.png
       - SLACK_FOOTER=Helm Deployment
       - SLACK_FOOTER_ICON=https://cloudposse.com/wp-content/uploads/sites/29/2018/02/kubernetes.png
@@ -162,3 +162,9 @@ steps:
       - SLACK_FIELD2_TITLE=Namespace
       - SLACK_FIELD2_VALUE=${{FEATURE}}
       - SLACK_FIELD2_SHORT=true
+      - SLACK_FIELD3_TITLE=Author
+      - SLACK_FIELD3_VALUE=@${{CF_COMMIT_AUTHOR}}
+      - SLACK_FIELD3_SHORT=true
+      - SLACK_FIELD4_TITLE=Branch
+      - SLACK_FIELD4_VALUE=${{CF_BRANCH}}
+      - SLACK_FIELD4_SHORT=true
