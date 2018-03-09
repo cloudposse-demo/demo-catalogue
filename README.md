@@ -1,12 +1,10 @@
-[![Build Status](https://travis-ci.org/microservices-demo/catalogue.svg?branch=master)](https://travis-ci.org/microservices-demo/catalogue) 
+# Catalogue [![Build Status](https://travis-ci.org/microservices-demo/catalogue.svg?branch=master)](https://travis-ci.org/microservices-demo/catalogue) 
 [![Coverage Status](https://coveralls.io/repos/github/microservices-demo/catalogue/badge.svg?branch=master)](https://coveralls.io/github/microservices-demo/catalogue?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/microservices-demo/catalogue)](https://goreportcard.com/report/github.com/microservices-demo/catalogue)
-[![Microbadger](https://images.microbadger.com/badges/image/weaveworksdemos/catalogue.svg)](http://microbadger.com/images/weaveworksdemos/catalogue "Get your own image badge on microbadger.com")
+[![Microbadger](https://images.microbadger.com/badges/image/weaveworksdemos/catalogue.svg)](http://microbadger.com/images/weaveworksdemos/catalogue "Get your own image badge on microbadger.com") [![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=cloudposse-demo&repoName=demo-catalogue&branch=master&pipelineName=demo-catalogue&accountName=osterman&type=cf-1)]( https://g.codefresh.io/repositories/cloudposse-demo/demo-catalogue/builds?filter=trigger:build;branch:master;service:5a3d06b991dbe100015e8130~demo-catalogue)
 
-
-# Catalogue
 A microservices-demo service that provides catalogue/product information. 
-This service is built, tested and released by travis.
+This service is built, tested and released by travis. 
 
 ## Bugs, Feature Requests and Contributing
 We'd love to see community contributions. We like to keep it simple and use Github issues to track bugs and feature requests and pull requests to manage contributions.
