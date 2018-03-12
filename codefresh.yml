@@ -2,7 +2,7 @@
 version: '1.0'
 
 steps:
-  init-variables:
+  init_variables:
     title: Init variables
     image: alpine
     commands:
@@ -14,7 +14,7 @@ steps:
     title: Build image
     type: build
     description: Build catalogue
-    image-name: cloudpossedemo/catalogue
+    image_name: cloudpossedemo/catalogue
     dockerfile: Dockerfile
 
   semver:
