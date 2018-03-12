@@ -6,7 +6,7 @@ steps:
     title: Init variables
     image: alpine
     commands:
-      - cf_export BUILD_HARNESS_VERSION=feature-helm-chart-ops
+      - cf_export BUILD_HARNESS_VERSION=0.4.0
       - cf_export GIT_BRANCH=${{CF_BRANCH}}
       - cf_export BASE_HOST=cloudposse.org
 
@@ -22,22 +22,22 @@ steps:
     image: cloudposse/build-harness:${{BUILD_HARNESS_VERSION}}
     working_directory: ${{build-image}}
     commands:
-      - make git:show
-      - make semver:show
-      - make semver:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
-      - make stages:export
-      - make stages:export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+      - make git/show
+      - make semver/show
+      - make semver/export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+      - make stages/export
+      - make stages/export >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
   build-chart:
     title: Build Charts
     image: cloudposse/build-harness:${{BUILD_HARNESS_VERSION}}
     working_directory: ${{build-image}}
     commands:
-      - REPO_NAME=cloudpossedemo REPO_ENDPOINT=${{REPO_ENDPOINT}} make helm:repo:add
-      - make helm:repo:add-remote
-      - make helm:chart:clean
-      - make helm:chart:build-all
-      - make helm:chart:publish
+      - REPO_NAME=cloudpossedemo REPO_ENDPOINT=${{REPO_ENDPOINT}} make helm/repo/add
+      - make helm/repo/add-remote
+      - make helm/chart/clean
+      - make helm/chart/build-all
+      - make helm/chart/publish
 
   push-image-commit:
     title: Push image with commit based semver tags
@@ -93,8 +93,8 @@ steps:
     when:
       condition:
         all:
-          executeForBranch: "'${{SEMVERSION_BRANCH}}' != ''"
-
+          executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
+          
   set-github-deployment-status-to-pending:
     title: Set GitHub "Staging Environment" deployment status to "pending"
     image: cloudposse/github-status-updater
