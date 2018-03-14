@@ -94,7 +94,7 @@ steps:
       condition:
         all:
           executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
-          
+
   set_github_deployment_status_to_pending:
     title: Set GitHub "Staging Environment" deployment status to "pending"
     image: cloudposse/github-status-updater
@@ -114,7 +114,7 @@ steps:
     image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
     environment:
       - CHART_NAME=catalogue
-      - RELEASE_NAME=catalogue-${{CF_BRANCH_TAG_NORMALIZED}}
+      - RELEASE_NAME=catalogue-${{FEATURE}}
       - KUBE_CONTEXT=cluster-4
       - NAMESPACE=${{NAMESPACE}}
       - CHART_VERSION=${{SEMVERSION_BRANCH}}
