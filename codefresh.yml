@@ -118,7 +118,7 @@ steps:
       - KUBE_CONTEXT=cluster-4
       - NAMESPACE=${{NAMESPACE}}
       - CHART_VERSION="0.1.0"
-      - CHART_REPO_URL="https://charts.cloudposse.com/incubator"
+      - CHART_REPO_URL="https://charts.cloudposse.com/incubator/"
       - WAIT=false
       - TIMEOUT=1200
       - custom_image_pullSecret_registry=${{IMAGE_PULL_SECRET_REGISTRY}}
