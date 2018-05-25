@@ -111,15 +111,19 @@ steps:
 
   create_тamespace:
     title: Create new namespace
-    image: codefresh/kube-helm:master
-    fail_fast: false
-    commands:
-     - kubectl config use-context ${{KUBE_CONTEXT}}
-     - kubectl replace namespace ${{NAMESPACE}}
-     - kubectl get secret regcred -o json | jq '.metadata.namespace = "${{NAMESPACE}}"' | kubectl replace --namespace ${{NAMESPACE}} -f -
-     - kubectl --namespace ${{NAMESPACE}} get serviceaccount default -o json | jq '.imagePullSecrets[0].name = "regcred"' | kubectl replace --namespace ${{NAMESPACE}} -f -
+    image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
     environment:
+      - CHART_NAME=dockercfg
+      - RELEASE_NAME=${{FEATURE}}-pull-secret
+      - KUBE_CONTEXT=cluster-4
       - NAMESPACE=${{NAMESPACE}}
+      - CHART_VERSION="0.1.0"
+      - CHART_REPO_URL="https://charts.cloudposse.com/incubator"
+      - WAIT=false
+      - TIMEOUT=1200
+      - custom_image_pullSecret_registry=${{IMAGE_PULL_SECRET_REGISTRY}}
+      - custom_image_pullSecret_username=${{IMAGE_PULL_SECRET_USERNAME}}
+      - custom_image_pullSecret_password=${{IMAGE_PULL_SECRET_PASSWORD}}
 
   deploy_helm:
     title: Deploy helm chart
