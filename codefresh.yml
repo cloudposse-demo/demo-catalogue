@@ -117,7 +117,7 @@ steps:
      - kubectl config use-context ${{KUBE_CONTEXT}}
      - kubectl replace namespace ${{NAMESPACE}}
      - kubectl get secret regcred -o json | jq '.metadata.namespace = "${{NAMESPACE}}"' | kubectl replace --namespace ${{NAMESPACE}} -f -
-     - kubectl --namespace ${{NAMESPACE}} patch serviceaccount default -p '{"imagePullSecrets": [{"name": "regcred"}]}'
+     - kubectl --namespace ${{NAMESPACE}} get serviceaccount default -o json | jq '.imagePullSecrets[0].name = "regcred"' | kubectl replace --namespace ${{NAMESPACE}} -f -
 
   deploy_helm:
     title: Deploy helm chart
