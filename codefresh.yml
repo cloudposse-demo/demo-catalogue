@@ -10,6 +10,7 @@ steps:
       - cf_export GIT_BRANCH=${{CF_BRANCH}}
       - cf_export BASE_HOST=cloudposse.org
 
+
   build_image:
     title: Build image
     type: build
