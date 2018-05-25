@@ -110,6 +110,22 @@ steps:
       - GITHUB_DESCRIPTION=Deploying changes to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
 
+  create_тamespace:
+    title: Create new namespace
+    image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
+    environment:
+      - CHART_NAME=dockercfg
+      - RELEASE_NAME=${{FEATURE}}-pull-secret
+      - KUBE_CONTEXT=cluster-4
+      - NAMESPACE=${{NAMESPACE}}
+      - CHART_VERSION="0.1.0"
+      - CHART_REPO_URL=https://charts.cloudposse.com/incubator/
+      - WAIT=false
+      - TIMEOUT=1200
+      - custom_image_pullSecret_registry=${{IMAGE_PULL_SECRET_REGISTRY}}
+      - custom_image_pullSecret_username=${{IMAGE_PULL_SECRET_USERNAME}}
+      - custom_image_pullSecret_password=${{IMAGE_PULL_SECRET_PASSWORD}}
+
   deploy_helm:
     title: Deploy helm chart
     image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
@@ -123,6 +139,7 @@ steps:
       - WAIT=false
       - TIMEOUT=1200
       - custom_fullnameOverride=catalogue
+      - custom_image_pullSecrets=${{FEATURE}}-pull-secret-dockercfg
 
   set_github_deployment_status_to_success:
     title: Set GitHub "Staging Environment" deployment status to "success"

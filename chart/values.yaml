@@ -4,7 +4,7 @@ mysql:
 
 replicaCount: 1
 image:
-  repository: cloudpossedemo/catalogue
+  repository: r.cfcr.io/cloudposse/cloudpossedemo/catalogue
   tag: '{{ (datasource "semver").version }}'
   pullPolicy: Always
   pullSecrets:
