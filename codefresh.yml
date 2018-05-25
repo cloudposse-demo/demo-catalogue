@@ -109,6 +109,16 @@ steps:
       - GITHUB_DESCRIPTION=Deploying changes to ${{FEATURE}} namespace
       - GITHUB_TARGET_URL=http://${{FEATURE}}.${{PROJECT}}.${{BASE_HOST}}
 
+  create_тamespace:
+    title: Create new namespace
+    image: codefresh/kube-helm:master
+    fail_fast: false
+    commands:
+     - kubectl config use-context ${{KUBE_CONTEXT}}
+     - kubectl replace namespace ${{NAMESPACE}}
+     - kubectl get secret regcred -o json | jq '.metadata.namespace = "${{NAMESPACE}}"' | kubectl replace --namespace ${{NAMESPACE}} -f -
+     - kubectl --namespace ${{NAMESPACE}} patch serviceaccount default -p '{"imagePullSecrets": [{"name": "regcred"}]}'
+
   deploy_helm:
     title: Deploy helm chart
     image: cloudposse/cf-plugin-helm:0.2.0-fix-working-with-repo
